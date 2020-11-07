@@ -1,13 +1,20 @@
 package com.samuelTI.course.api.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_users")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -15,12 +22,19 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
 
+	/**
+	 * @JsonIgnore -> Controle para que não vire um loop de chamadas das PKs, de client para order e order para client
+	 * @OneToMany(mappedBy = "client") -> Controle do atributo que está sendo mapeado
+	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Orders> orders = new ArrayList<Orders>();
+	
 	public User() {
 
 	}
@@ -64,14 +78,19 @@ public class User implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getPassword() {
-		return password;
-	}
+//	public String getPassword() {
+//		return password;
+//	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
+	public List<Orders> getOrders() {
+		return orders;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
