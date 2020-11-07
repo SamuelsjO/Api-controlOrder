@@ -1,4 +1,4 @@
-package com.samuelTI.course;
+package com.samuelTI.course.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
