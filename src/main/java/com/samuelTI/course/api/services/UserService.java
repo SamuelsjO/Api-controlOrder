@@ -29,4 +29,11 @@ public class UserService {
 		Optional<User> objetoUser =  userRepository.findById(id);
 		return objetoUser.get();
 	}
+	
+    /**
+     * Insere um Usuario no banco
+     */
+	public User insert(User obj) {
+		return userRepository.save(obj);
+	}
 }

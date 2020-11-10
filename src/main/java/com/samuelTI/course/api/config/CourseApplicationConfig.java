@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.samuelTI.course.api.entities.Category;
 import com.samuelTI.course.api.entities.OrderItem;
 import com.samuelTI.course.api.entities.Orders;
+import com.samuelTI.course.api.entities.Payment;
 import com.samuelTI.course.api.entities.Product;
 import com.samuelTI.course.api.entities.User;
 import com.samuelTI.course.api.entities.enums.OrderStatus;
@@ -84,6 +85,11 @@ public class CourseApplicationConfig implements CommandLineRunner {
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2020-06-20T21:59:07Z"), o1);
+		
+		o1.setPayment(pay1);
+		
+		ordersRepository.save(o1);
 	}
 
 }
